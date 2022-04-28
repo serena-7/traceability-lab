@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
   rollbar.info("html file served successfully.");
 });
 
-app.get("/api/houses", getHouses2);
+app.get("/api/houses", getHouses);
 app.post("/api/houses", createHouse);
 app.put("/api/houses/:id", updateHouse);
 app.delete("/api/houses/:id", deleteHouse);

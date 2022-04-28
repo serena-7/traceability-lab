@@ -7,6 +7,14 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// include and initialize the rollbar library with your access token
+var Rollbar = require("rollbar");
+var rollbar = new Rollbar({
+  accessToken: "599fc637f9d04bbcad4f18e4556aeaaf",
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+});
+
 const {
   getHouses,
   deleteHouse,
@@ -15,6 +23,7 @@ const {
 } = require("./controller.js");
 
 app.get("/", (req, res) => {
+  rollerbar.log("hello world!");
   res.sendFile(path.join(__dirname, "../index.html"));
 });
 

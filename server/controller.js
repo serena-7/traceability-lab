@@ -1,6 +1,13 @@
 const houses = require("./db.json");
 let houseID = 4;
 
+var Rollbar = require("rollbar");
+var rollbar = new Rollbar({
+  accessToken: "599fc637f9d04bbcad4f18e4556aeaaf",
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+});
+
 module.exports = {
   getHouses: (req, res) => {
     res.status(200).send(houses);

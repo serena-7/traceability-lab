@@ -6,7 +6,8 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, "../")));
+app.use(express.static(path.join(__dirname, "/")));
 // include and initialize the rollbar library with your access token
 var Rollbar = require("rollbar");
 var rollbar = new Rollbar({

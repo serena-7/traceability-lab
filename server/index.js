@@ -25,6 +25,7 @@ var rollbar = new Rollbar({
 
 //------------
 const houses = require(path.join(__dirname, "./db.json"));
+rollbar.log(houses);
 let houseID = 4;
 
 // module.exports = {

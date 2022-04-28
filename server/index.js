@@ -27,16 +27,16 @@ var rollbar = new Rollbar({
 const houses = require("./db.json");
 let houseID = 4;
 
-module.exports = {
-  getHouses: (req, res) => {
+// module.exports = {
+  const getHouses = (req, res) => {
     res.status(200).send(houses);
   },
-  deleteHouse: (req, res) => {
+  const deleteHouse = (req, res) => {
     const index = houses.findIndex((e) => e.id === +req.params.id);
     houses.splice(index, 1);
     res.status(200).send(houses);
-  },
-  createHouse: (req, res) => {
+  }
+  const createHouse = (req, res) => {
     const { address, price, imageURL } = req.body;
     let newHouse = {
       id: houseID,
@@ -52,8 +52,8 @@ module.exports = {
       houseID++;
       res.status(200).send(houses);
     }
-  },
-  updateHouse: (req, res) => {
+  }
+  const updateHouse = (req, res) => {
     const id = req.params.id;
     const type = req.body.type;
     const index = houses.findIndex((e) => e.id === +id);
@@ -66,8 +66,8 @@ module.exports = {
     } else {
       res.status(400).send("request failed");
     }
-  },
-};
+  }
+// };
 //------------------
 
 app.get("/", (req, res) => {

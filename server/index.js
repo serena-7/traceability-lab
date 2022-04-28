@@ -23,7 +23,7 @@ const {
 } = require("./controller.js");
 
 app.get("/", (req, res) => {
-  rollerbar.log("hello world!");
+  rollbar.log("hello world!");
   res.sendFile(path.join(__dirname, "../index.html"));
 });
 

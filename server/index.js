@@ -23,15 +23,16 @@ const {
 } = require("./controller.js");
 
 app.get("/", (req, res) => {
-  rollbar.log("hello world!");
   res.sendFile(path.join(__dirname, "../index.html"));
+  rollbar.info("html file served successfully.");
 });
 
-app.get("/api/houses", getHouses);
+app.get("/api/houses", getHouses2);
 app.post("/api/houses", createHouse);
 app.put("/api/houses/:id", updateHouse);
 app.delete("/api/houses/:id", deleteHouse);
 
 const port = process.env.PORT || 4560;
 
+app.use(rollbar.errorHandler());
 app.listen(port, () => console.log(`listening on ${port}`));

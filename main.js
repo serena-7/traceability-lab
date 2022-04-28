@@ -3,8 +3,8 @@ const form = document.querySelector("form");
 
 // const baseURL = `http://localhost:4560/api/houses`;
 // const baseURL = `https://ss-traceability-lab-f21.herokuapp.com/api/houses`;
+const baseURL = `/api/houses`;
 
-const baseURL = ``;
 const housesCallback = ({ data: houses }) => displayHouses(houses);
 const errCallback = (err) => console.log(err);
 

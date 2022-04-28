@@ -28,45 +28,45 @@ const houses = require("./db.json");
 let houseID = 4;
 
 // module.exports = {
-  const getHouses = (req, res) => {
+const getHouses = (req, res) => {
+  res.status(200).send(houses);
+};
+const deleteHouse = (req, res) => {
+  const index = houses.findIndex((e) => e.id === +req.params.id);
+  houses.splice(index, 1);
+  res.status(200).send(houses);
+};
+const createHouse = (req, res) => {
+  const { address, price, imageURL } = req.body;
+  let newHouse = {
+    id: houseID,
+    address,
+    price,
+    imageURL,
+  };
+  if (address === "") {
+    rollbar.error("no address added");
+  } else {
+    rollbar.log("new house added successfully");
+    houses.push(newHouse);
+    houseID++;
     res.status(200).send(houses);
-  },
-  const deleteHouse = (req, res) => {
-    const index = houses.findIndex((e) => e.id === +req.params.id);
-    houses.splice(index, 1);
+  }
+};
+const updateHouse = (req, res) => {
+  const id = req.params.id;
+  const type = req.body.type;
+  const index = houses.findIndex((e) => e.id === +id);
+  if (type === "minus" && houses[index].price >= 10000) {
+    houses[index].price -= 10000;
     res.status(200).send(houses);
+  } else if (type === "plus") {
+    houses[index].price += 10000;
+    res.status(200).send(houses);
+  } else {
+    res.status(400).send("request failed");
   }
-  const createHouse = (req, res) => {
-    const { address, price, imageURL } = req.body;
-    let newHouse = {
-      id: houseID,
-      address,
-      price,
-      imageURL,
-    };
-    if (address === "") {
-      rollbar.error("no address added");
-    } else {
-      rollbar.log("new house added successfully");
-      houses.push(newHouse);
-      houseID++;
-      res.status(200).send(houses);
-    }
-  }
-  const updateHouse = (req, res) => {
-    const id = req.params.id;
-    const type = req.body.type;
-    const index = houses.findIndex((e) => e.id === +id);
-    if (type === "minus" && houses[index].price >= 10000) {
-      houses[index].price -= 10000;
-      res.status(200).send(houses);
-    } else if (type === "plus") {
-      houses[index].price += 10000;
-      res.status(200).send(houses);
-    } else {
-      res.status(400).send("request failed");
-    }
-  }
+};
 // };
 //------------------
 

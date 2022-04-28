@@ -38,6 +38,7 @@ module.exports = {
       houses[index].price += 10000;
       res.status(200).send(houses);
     } else {
+      rollbar.log("invalid price change");
       res.status(400).send("request failed");
     }
   },
